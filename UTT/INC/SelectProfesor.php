@@ -8,6 +8,6 @@
  
 	$mDatos->conectar();
 
-	echo $dDatos->Seleccionar("select * from Profesor");
+	echo $mDatos->Seleccionar("select * from Profesor");
 
 ?>

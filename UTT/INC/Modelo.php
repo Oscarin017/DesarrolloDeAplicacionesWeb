@@ -11,7 +11,7 @@
 			try
 			{
 				$StringConexion=new Conexion();
-				$this->PDO=new PDO("mysql:host=".$Servidor.";dbname=".$BaseDatos.";charset=utf8", $Usuario, $Contrasena);
+				$this->PDO=new PDO("mysql:host=".$StringConexion->Servidor.";dbname=".$StringConexion->BaseDatos.";charset=utf8", $StringConexion->Usuario, $StringConexion->Contrasena);
 			}
 			catch(PDOException $e)
 			{
@@ -43,9 +43,9 @@
 			$this->PDO=NULL;
 		}
 
-		public function Seleccionar($SQL)
+		public function Seleccionar($Tabla, $Condicion)
 		{	
-			return json_encode($this->Select($SQL));
+			return json_encode($this->Select("select * from ".$Tabla." ".$Condicion));
 		}
 		
 		public function Insert($SQL)
