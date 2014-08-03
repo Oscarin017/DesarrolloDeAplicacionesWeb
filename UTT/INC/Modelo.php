@@ -4,13 +4,82 @@
 	class Modelo
 	{
 		private $PDO;
+		private $NumRenglones;
 
-		function conectar()
+		public function conectar()
 		{
 			try
 			{
 				$StringConexion=new Conexion();
 				$this->PDO=new PDO("mysql:host=".$Servidor.";dbname=".$BaseDatos.";charset=utf8", $Usuario, $Contrasena);
+			}
+			catch(PDOException $e)
+			{
+				echo $e->getMessage();
+			}
+		}
+
+		function Select($SQL)
+		{
+			try
+			{
+				$Resultado = $this->PDO->query($SQL);
+				while($Renglon =$Resultado->fetch(PDO::FETCH_ASSOC)) 
+				{
+           			$Datos[]=$Renglon;
+					$this->NombreColumnas= array_keys($Renglon); 
+				}	
+				$this->NumRenglones = count($Datos);
+				return  $Datos;
+			}
+			catch(PDOException $e)
+			{
+				echo $e->getMessage();
+			}	
+		}
+
+		public  function Cerrar_Conexion()
+		{
+			$this->PDO=NULL;
+		}
+
+		public function Seleccionar($SQL)
+		{	
+			return json_encode($this->Select($SQL));
+		}
+		
+		public function Insert($SQL)
+		{
+			try
+			{
+				$Resultado = $this->PDO->exec($SQL);
+				return $Resultado;
+			}
+			catch(PDOException $e)
+			{
+				echo $e->getMessage();
+			}
+		}	
+
+		public function Modificar($SQL)
+		{
+			try
+			{
+				$Resultado = $this->PDO->exec($SQL);
+				return $Resultado;
+			}
+			catch(PDOException $e)
+			{
+				echo $e->getMessage();
+			}
+		}
+
+		public function Eliminar($SQL)
+		{
+			try
+			{
+				$Resultado = $this->PDO->exec($SQL);
+				return $Resultado;
 			}
 			catch(PDOException $e)
 			{
