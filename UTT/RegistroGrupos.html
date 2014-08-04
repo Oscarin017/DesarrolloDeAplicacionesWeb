@@ -9,42 +9,7 @@
 	<link rel="stylesheet" href="CSS/custom.css">
 	<script src="JS/JQuery.js"></script>
 	<script src="JS/bootstrap.min.js"></script>
-	<script type="text/javascript">
-    $(document).ready(function()
-      {
-        $("#btnRegistrar").click(function(event)
-          {
-            event.preventDefault();
-            $.ajax(
-            {
-              url: 'INC/InsertarAlumno.php',
-              type: 'POST',
-              datatype: 'json',
-              data: $("#frmAlumno").serialize(),
-            })
-            .done(function(r)
-            {
-              if(r.Resultado==1)
-              {
-                alert("El Alumno se registro correctamente.");
-                $(".form-control").val("");
-              }
-              else
-              {
-                alert("Error =(");
-              }
-            })
-            .fail(function()
-            {
-              console.log("Error");
-            })
-            .always(function()
-            {
-              console.log("Completo");
-            });
-          });
-      });
-  </script>
+	<script ></script>
 </head>
 <body>
   <nav class="navbar navbar-inverse" role="navigation">
@@ -69,14 +34,14 @@
             <li><a href="#">Consultar</a></li>
           </ul>¡
         </li>
-        <li class="dropdown active">
+        <li class="dropdown ">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alumnos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="RegistroAlumnos.html">Registrar</a></li>
             <li><a href="#">Consultar</a></li>
           </ul>
         </li>
-        <li class="dropdown">
+        <li class="dropdown active">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Registrar</a></li>
@@ -95,44 +60,25 @@
   	</div><!-- /.container-fluid -->
   </nav>
   	<div class="container">
-		  <h1><span class="label label-primary">Registro de Alumnos</span></h1>
+		  <h1><span class="label label-primary">Registro de Grupos</span></h1>
       <br/>
       <div class="jumbotron">
         <div class="container">
-        <form action="" role="form" class="form-horizontal" id="frmAlumno">
-          <div class="col-md-4">
+        <form action="" role="form" class="form-horizontal">
+          <div class="col-md-6">
           <div class="form-group">
-            <label for="Nombre">Nombre</label>
-            <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre del Alumno">
+            <label for="Nombre">Nombre del Grupo</label>
+            <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre del Grupo">
           </div>
-          <div class="form-group">
-            <label for="Ap_Pat">Apellido Paterno</label>
-            <input type="text" name="Ape_Pat" class="form-control" id="Ap_Pat" placeholder="Apellido Paterno">
+             <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Grupo</button>
           </div>
-          <div class="form-group">
-            <label for="Ap_Mat">Apellido Materno</label>
-            <input type="text" name="Ape_Mat" class="form-control" id="Ap_Mat" placeholder="Apellido Materno">
-          </div>
-          </div>
-          <div class="col-md-4">
-          <div class="form-group">
-            <label for="Email">Correo</label>
-            <input type="email" name="Email" class="form-control" id="Email" placeholder="Correo del Alumno">
-          </div>
-          <div class="form-group">
-            <label for="EmailT">Correo de Tutor</label>
-            <input type="email" name="EmailT" class="form-control" id="EmailT" placeholder="Correo de Padre o Tutor">
-          </div>
-          </div>
-          <div class="col-md-4">
-            <img class="img-responsive" src="IMG/Bad Luck Brian.jpg" alt="">
-          </div>
-          <div class="col-md-12">
-            <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Alumno</button>
+          <div class="col-md-6">
+            <img class="img-responsive" src="IMG/Grupos.jpg" alt="">
           </div>
         </form>
         </div>
       </div>
 		</div>
+	</div>
 </body>
 </html>
