@@ -27,17 +27,17 @@
     	<!-- Collect the nav links, forms, and other content for toggling -->
     	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown active">
+        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profesores<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#">Registrar</a></li>
             <li><a href="#">Consultar</a></li>
           </ul>
         </li>
-        <li class="dropdown">
+        <li class="dropdown active">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Alumnos<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="RegistroAlumnos.html">Registrar</a></li>
+            <li><a href="#">Registrar</a></li>
             <li><a href="#">Consultar</a></li>
           </ul>
         </li>
@@ -60,7 +60,7 @@
   	</div><!-- /.container-fluid -->
   </nav>
   	<div class="container">
-		  <h1><span class="label label-primary">Registro de Profesores</span></h1>
+		  <h1><span class="label label-primary">Registro de Alumnos</span></h1>
       <br/>
       <div class="jumbotron">
         <div class="container">
@@ -68,7 +68,7 @@
           <div class="col-md-4">
           <div class="form-group">
             <label for="Nombre">Nombre</label>
-            <input type="text" name="nombre" class="form-control" id="Nombre" placeholder="Nombre del Profesor">
+            <input type="text" name="nombre" class="form-control" id="Nombre" placeholder="Nombre del Alumno">
           </div>
           <div class="form-group">
             <label for="Ap_Pat">Apellido Paterno</label>
@@ -78,30 +78,22 @@
             <label for="Ap_Mat">Apellido Materno</label>
             <input type="text" name="Ap_Mat" class="form-control" id="Ap_Mat" placeholder="Apellido Materno">
           </div>
+          </div>
+          <div class="col-md-4">
           <div class="form-group">
             <label for="Email">Correo</label>
-            <input type="email" name="Email" class="form-control" id="Email" placeholder="Correo Electronico">
+            <input type="email" name="Email" class="form-control" id="Email" placeholder="Correo del Alumno">
+          </div>
+          <div class="form-group">
+            <label for="CorreoT">Correo de Tutor</label>
+            <input type="number" name="CorreoT" class="form-control" id="CorreoT" placeholder="Correo de Padre o Tutor">
           </div>
           </div>
           <div class="col-md-4">
-          <div class="form-group">
-            <label for="Telefono">Telefono</label>
-            <input type="number" name="Telefono" class="form-control" id="Telefono" placeholder="Telefono (10 digitos)">
-          </div>
-          <div class="form-group">
-            <label for="Usuario">Usuario</label>
-            <input type="text" name="Usuario" class="form-control" id="Usuario" placeholder="Nombre de Usuario">
-          </div>
-          <div class="form-group">
-            <label for="Contraseña">Contraseña</label>
-            <input type="password" name="Contraseña" class="form-control" id="Contraseña" placeholder="Contraseña">
-          </div>
-          </div>
-          <div class="col-md-4">
-            <img class="img-responsive" src="IMG/Unhelpful High School Teacher.jpg" alt="">
+            <img class="img-responsive" src="IMG/Bad Luck Brian.jpg" alt="">
           </div>
           <div class="col-md-12">
-            <button class="btn btn-lg btn-success">Registrar Profesor</button>
+            <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Alumno</button>
           </div>
         </form>
         </div>
