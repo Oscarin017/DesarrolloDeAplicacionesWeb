@@ -9,7 +9,43 @@
 	<link rel="stylesheet" href="CSS/custom.css">
 	<script src="JS/JQuery.js"></script>
 	<script src="JS/bootstrap.min.js"></script>
-	<script ></script>
+	<script type="text/javascript">
+    $(document).ready(function()
+      {
+        $("#btnRegistrar").click(function(event)
+          {
+            event.preventDefault();
+            $.ajax(
+            {
+              url: 'INC/InsertarProfesor.php',
+              type: 'POST',
+              datatype: 'json',
+              data: $("#frmProfesor").serialize(),
+            })
+            .done(function(r)
+            {
+              if(r.Resultado==1)
+              {
+                alert("El profesor se registro correctamente.");
+                $("#frmProfesor").val("");
+                $(".form-control").val("");
+              }
+              else
+              {
+                alert("Error =(");
+              }
+            })
+            .fail(function()
+            {
+              console.log("Error");
+            })
+            .always(function()
+            {
+              console.log("Completo");
+            });
+          });
+      });
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-inverse" role="navigation">
@@ -64,19 +100,19 @@
       <br/>
       <div class="jumbotron">
         <div class="container">
-        <form action="" role="form" class="form-horizontal">
+        <form action="" role="form" class="form-horizontal" id="frmProfesor">
           <div class="col-md-4">
           <div class="form-group">
             <label for="Nombre">Nombre</label>
-            <input type="text" name="nombre" class="form-control" id="Nombre" placeholder="Nombre del Profesor">
+            <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre del Profesor">
           </div>
           <div class="form-group">
             <label for="Ap_Pat">Apellido Paterno</label>
-            <input type="text" name="Ap_Pat" class="form-control" id="Ap_Pat" placeholder="Apellido Paterno">
+            <input type="text" name="Ape_Pat" class="form-control" id="Ap_Pat" placeholder="Apellido Paterno">
           </div>
           <div class="form-group">
             <label for="Ap_Mat">Apellido Materno</label>
-            <input type="text" name="Ap_Mat" class="form-control" id="Ap_Mat" placeholder="Apellido Materno">
+            <input type="text" name="Ape_Mat" class="form-control" id="Ap_Mat" placeholder="Apellido Materno">
           </div>
           <div class="form-group">
             <label for="Email">Correo</label>
@@ -93,15 +129,15 @@
             <input type="text" name="Usuario" class="form-control" id="Usuario" placeholder="Nombre de Usuario">
           </div>
           <div class="form-group">
-            <label for="Contraseña">Contraseña</label>
-            <input type="password" name="Contraseña" class="form-control" id="Contraseña" placeholder="Contraseña">
+            <label for="Contrasena">Contrasena</label>
+            <input type="password" name="Contrasena" class="form-control" id="Contrasena" placeholder="Contrasena">
           </div>
           </div>
           <div class="col-md-4">
             <img class="img-responsive" src="IMG/Unhelpful High School Teacher.jpg" alt="">
           </div>
           <div class="col-md-12">
-            <button class="btn btn-lg btn-success">Registrar Profesor</button>
+            <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Profesor</button>
           </div>
         </form>
         </div>

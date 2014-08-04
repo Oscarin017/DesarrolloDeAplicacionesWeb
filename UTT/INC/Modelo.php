@@ -48,7 +48,7 @@
 			return json_encode($this->Select("select * from ".$Tabla." ".$Condicion));
 		}
 		
-		public function Insert($SQL)
+		public function Insertar($SQL)
 		{
 			try
 			{
