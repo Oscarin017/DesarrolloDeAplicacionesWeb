@@ -9,7 +9,42 @@
 	<link rel="stylesheet" href="CSS/custom.css">
 	<script src="JS/JQuery.js"></script>
 	<script src="JS/bootstrap.min.js"></script>
-	<script ></script>
+	<script type="text/javascript">
+    $(document).ready(function()
+      {
+        $("#btnRegistrar").click(function(event)
+          {
+            event.preventDefault();
+            $.ajax(
+            {
+              url: 'INC/InsertarGrupo.php',
+              type: 'POST',
+              datatype: 'json',
+              data: $("#frmGrupo").serialize(),
+            })
+            .done(function(r)
+            {
+              if(r.Resultado==1)
+              {
+                alert("El grupo se registro correctamente.");
+                $(".form-control").val("");
+              }
+              else
+              {
+                alert("Error =(");
+              }
+            })
+            .fail(function()
+            {
+              console.log("Error");
+            })
+            .always(function()
+            {
+              console.log("Completo");
+            });
+          });
+      });
+  </script>
 </head>
 <body>
   <nav class="navbar navbar-inverse" role="navigation">
@@ -64,13 +99,17 @@
       <br/>
       <div class="jumbotron">
         <div class="container">
-        <form action="" role="form" class="form-horizontal">
+        <form action="" role="form" class="form-horizontal" id="frmGrupo">
           <div class="col-md-6">
-          <div class="form-group">
-            <label for="Nombre">Nombre del Grupo</label>
-            <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre del Grupo">
-          </div>
-             <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Grupo</button>
+            <div class="form-group">
+              <label for="Nombre">Nombre del Grupo</label>
+              <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre del Grupo">
+            </div>
+            <div class="form-group">
+              <label for="Profesor">Profesor</label>
+              <input type="number" name="Profesor" class="form-control" id="Profesor" placeholder="Escribe el ID del Profesor">
+            </div>
+            <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Grupo</button>
           </div>
           <div class="col-md-6">
             <img class="img-responsive" src="IMG/Grupos.jpg" alt="">
