@@ -7,6 +7,6 @@
 	$mDatos =new Modelo(); 
 	$mDatos->conectar();
 
-	echo $mDatos->Seleccionar("Profesor", "Where bActivo_Pro=1");
+	echo $mDatos->Seleccionar("Alumno", "Where bActivo_Alu=1");
 
 ?>
