@@ -174,7 +174,9 @@
               				</div>
             			</div>
             			<div class="hidden-sm hidden-xs col-md-6">
-              				<img class="img-responsive" src="IMG/Grupos.jpg" alt="">
+            				<div class="container">
+            					<img class="img-responsive" src="IMG/Grupos.jpg" alt="">
+            				</div>
             			</div>
           			</form>
           			<table class="table" id="tbAlumnoGrupo">
