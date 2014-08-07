@@ -7,12 +7,17 @@
     <script type="text/javascript">
       $(document).ready(function()
       {
+        
         $("#btnRegistrar").click(function(event)
         {
           event.preventDefault();
           if($("#Profesor").val() == 1)
           {
             alert("Selecciona un profesor.");
+          }
+          else
+          {
+            agregarGrupo();
           }
           
         });

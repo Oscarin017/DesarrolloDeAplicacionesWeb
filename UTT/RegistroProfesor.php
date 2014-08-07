@@ -8,38 +8,37 @@
 
       $(document).ready(function()
       {
+        
         $("#btnRegistrar").click(function(event)
         {
           event.preventDefault();
-          $.ajax(
-          {
-            url: 'INC/InsertarProfesor.php',
-            type: 'POST',
-            datatype: 'json',
-            data: $("#frmProfesor").serialize(),
-          })
-          .done(function(r)
-          {
-            if(r.Resultado==1)
-            {
-              alert("El profesor se registro correctamente.");
-              $(".form-control").val("");
-            }
-            else
-            {
-              alert("Error =(");
-            }
-          })
-          .fail(function()
-          {
-            console.log("Error");
-          })
-          .always(function()
-          {
-            console.log("Completo");
-          });
+          insertarProfesor();
         });
+          
       });
+
+      function insertarProfesor()
+      {
+        $.ajax(
+        {
+          url: 'INC/InsertarProfesor.php',
+          type: 'POST',
+          datatype: 'json',
+          data: $("#frmProfesor").serialize(),
+        })
+        .done(function(r)
+        {
+          if(r.Resultado==1)
+          {
+            alert("El profesor se registro correctamente.");
+            $(".form-control").val("");
+          }
+          else
+          {
+            alert("Error =(");
+          }
+        });     
+      }
 
     </script>
   </head>
