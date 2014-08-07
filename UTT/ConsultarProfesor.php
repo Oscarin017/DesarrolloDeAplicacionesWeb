@@ -88,7 +88,7 @@
 			          	</div>
 			          	<div class="col-md-12">
               				<button class="btn btn-lg btn-success" id="btnBuscar">Buscar</button>
-            			</div>
+            				</div>
           			</form>
           			<table class="table" id="tbProfesor">
           				<thead>
