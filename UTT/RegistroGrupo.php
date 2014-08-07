@@ -10,34 +10,11 @@
         $("#btnRegistrar").click(function(event)
         {
           event.preventDefault();
-          $.ajax(
+          if($("#Profesor").val() == 1)
           {
-            url: 'INC/InsertarGrupo.php',
-            type: 'POST',
-            datatype: 'json',
-            data: $("#frmGrupo").serialize(),
-          })
-          .done(function(r)
-          {
-            if(r.Resultado==1)
-            {
-              alert("El grupo se registro correctamente.");
-              $("#Nombre").val("");
-              $("#Profesor").val(2);
-            }
-            else
-            {
-              alert("Error =(");
-            }
-          })
-          .fail(function()
-          {
-            console.log("Error");
-          })
-          .always(function()
-          {
-            console.log("Completo");
-          });
+            alert("Selecciona un profesor.");
+          }
+          
         });
 
         $.ajax(
@@ -65,6 +42,38 @@
           console.log("Completo");
         });
 
+        function agregarGrupo()
+        {
+          $.ajax(
+          {
+            url: 'INC/InsertarGrupo.php',
+            type: 'POST',
+            datatype: 'json',
+            data: $("#frmGrupo").serialize(),
+          })
+          .done(function(r)
+          {
+            if(r.Resultado==1)
+            {
+              alert("El grupo se registro correctamente.");
+              $("#Nombre").val("");
+              $("#Profesor").val(1);
+            }
+            else
+            {
+              alert("Error =(");
+            }
+          })
+          .fail(function()
+          {
+            console.log("Error");
+          })
+          .always(function()
+          {
+            console.log("Completo");
+          });
+        }
+
     });
   </script>
   </head>
@@ -85,7 +94,9 @@
               </div>
               <div class="form-group">
                 <label for="Profesor">Profesor</label>
-                <select class="form-control" id="Profesor" name="Profesor"></select>
+                <select class="form-control" id="Profesor" name="Profesor">
+                  <option value="1">Selecciona un Profesor</option>
+                </select>
               </div>
               <button class="btn btn-lg btn-success" id="btnRegistrar">Registrar Grupo</button>
             </div>
