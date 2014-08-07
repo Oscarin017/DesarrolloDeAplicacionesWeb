@@ -4,16 +4,14 @@
      		require 'INC/Head.php';
     	?>
     	<script type="text/javascript">
+
     		$(document).ready(function()
 			{
 
-				cargarGrupo();
-				llenarTablaAlumno();	
-
-		        $("#Grupo").change(function()
+		        $("#Buscar").click(function(event)
 	    		{
-	    			limpiarTablaGrupo();
-	    			llenarTablaGrupo($("#Grupo").val());
+	    			limpiarTabla();
+	    			llenarTabla();
 	    		}); 
 
 	    		$("#tbAlumno").on("click", "button", function(event)
@@ -23,74 +21,11 @@
 
 		    });
 			
-			function insertarGruAlu(IDGru, IDAlu)
-			{
-				var GruAlu = 
-	    		{
-    				IDGrupo: IDGru, 
-    				IDAlumno: IDAlu,
-	    		};
-				$.ajax(
-    			{
-    				url: 'INC/InsertarGrupoAlumno.php',
-    				type: 'POST',
-    				datatype: 'json',
-    				data: GruAlu,
-    			})
-    			.done(function(r)
-    			{
-    				if(r.Resultado==1)
-        			{
-          				alert("Alumno asignado a grupo exitosamente.");
-          				limpiarTablaGrupo();
-          				llenarTablaGrupo(GruAlu.IDGrupo);
-        			}
-        			else
-        			{
-          				alert("Error =(");
-        			}
-    			})
-	        	.fail(function()
-	        	{
-	          		console.log("Error");
-	        	})
-	        	.always(function()
-	        	{
-	          		console.log("Completo");
-	        	});
-			}
-
-			function cargarGrupo()
-			{
-				$.ajax(
-		        {
-		        	url: 'INC/SeleccionGrupo.php',
-		          	type: 'POST',
-		          	datatype: 'json',
-		        })
-		        .done(function(r)
-		        {
-		          	$.each(r, function(index, g)
-		          	{
-		            	$("#Grupo").append("<option value='"+g.iIDGrupo_Gru+"'>"+g.vNombre_Gru+"</option>");
-		          	});
-		        })
-		        .fail(function()
-		        {
-		          	console.log("Error");
-		        })
-		        .always(function()
-		        {
-		        	llenarTablaGrupo($("#Grupo").val());
-		          	console.log("Completo");
-		        });
-			}
-
 			function llenarTablaAlumno()
 			{
 				$.ajax(
 		        {
-		        	url: 'INC/SeleccionAlumno.php',
+		        	url: 'INC/SeleccionProfesor2.php',
 		          	type: 'POST',
 		          	datatype: 'json',
 		        })
@@ -99,11 +34,10 @@
 		          	$.each(r, function(index, a)
 		          	{
 		            	$("#tbAlumno tbody").append("<tr>\
-		            		<td>"+a.iIDAlumno_Alu+"</td>\
-		            		<td>"+a.vApellidoPaterno_Alu+"</td>\
-		            		<td>"+a.vApellidoMaterno_Alu+"</td>\
-		            		<td>"+a.vNombre_Alu+"</td>\
-		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Agregar</button></td>\
+		            		<td>"+a.iIDProfesor_Pro+"</td>\
+		            		<td>"+a.vApellidoPaterno_Pro+" "+a.vApellidoMaterno_Pro+" "+a.vNombre_Pro+"</td>\
+		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDProfesor_Pro+"'>Agregar</button></td>\
+		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDProfesor_Pro+"'>Agregar</button></td>\
 		            		</tr>");
 		          	});
 		        })
@@ -117,42 +51,9 @@
 		        });
 			}
 
-			function llenarTablaGrupo(Grupo)
+			function limpiarTabla()
 			{
-				var GruAlu = 
-    			{
-    				IDGrupo: Grupo,
-    			};
-    			$.ajax(
-    			{
-    				url: 'INC/SeleccionGrupoAlumno.php',
-    				type: 'POST',
-    				datatype: 'json',
-    				data: GruAlu,
-    			})
-    			.done(function(r)
-    			{
-    				$.each(r, function(index, a)
-	          		{
-	            		$("#tbAlumnoGrupo tbody").append("<tr>\
-	            		<td>"+a.iIDAlumno_Alu+"</td>\
-	            		<td>"+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+" "+a.vNombre_Alu+"</td>\
-	            		</tr>");
-	          		});
-    			})
-	        	.fail(function()
-	        	{
-	          		console.log("Error");
-	        	})
-	        	.always(function()
-	        	{
-	          		console.log("Completo");
-	        	});
-			}
-
-			function limpiarTablaGrupo()
-			{
-				$("#tbAlumnoGrupo tbody").html("");
+				$("#tbProfesor tbody").html("");
 			}
 	
     	</script>
@@ -162,38 +63,39 @@
       		require 'INC/Header.php';
     	?>
     	<div class="container">
-      		<h1><span class="label label-primary">Asignacion de alumnos a grupos</span></h1>
+      		<h1><span class="label label-primary">Consulta Profesores</span></h1>
       		<br/>
       		<div class="jumbotron">
         		<div class="container">
-          			<form action="" role="form" class="form-horizontal" id="frmGrupo">
-            			<div class="col-md-6">
-              				<div class="form-group">
-                				<label for="Grupo">Grupo</label>
-                				<select class="form-control" id="Grupo" name="Grupo"></select>
-              				</div>
-            			</div>
-            			<div class="hidden-sm hidden-xs col-md-6">
-              				<img class="img-responsive" src="IMG/Grupos.jpg" alt="">
+          			<form action="" role="form" class="form-horizontal" id="frmProfesor">
+          				<div class="col-md-4">
+	            			<div class="form-group">
+				                <label for="IDProfesor">IDProfesor</label>
+				                <input type="text" name="IDProfesor" class="form-control" id="IDProfesor" placeholder="ID del Profesor">
+				           	</div>
+				       	</div>
+				       	<div class="col-md-4">
+	            			<div class="form-group">
+				           		<label for="Nombre">Nombre</label>
+				                <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre">
+				          	</div>
+				      	</div>
+			          	<div class="col-md-4">
+				            <div class="form-group">
+				           		<label for="Ape_Pat">Ape_Pat</label>
+				                <input type="text" name="Ape_Pat" class="form-control" id="Ape_Pat" placeholder="Apellido Paterno">
+				          	</div>
+			          	</div>
+			          	<div class="col-md-12">
+              				<button class="btn btn-lg btn-success" id="btnBuscar">Buscar</button>
             			</div>
           			</form>
-          			<table class="table" id="tbAlumnoGrupo">
+          			<table class="table" id="tbProfesor">
           				<thead>
           					<tr>
-          						<th>ID Alumno</th>
+          						<th>ID Profesor</th>
           						<th>Nombre Completo</th>
-          					</tr>
-          				</thead>
-          				<tbody>
-          				</tbody>
-          			</table>
-          			<table class="table" id="tbAlumno">
-          				<thead>
-          					<tr>
-          						<th>ID Alumno</th>
-          						<th>Apellido Paterno</th>
-          						<th>Apellido Materno</th>
-          						<th>Nombre</th>
+          						<th></th>
           						<th></th>
           					</tr>
           				</thead>

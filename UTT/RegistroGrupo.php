@@ -7,7 +7,9 @@
     <script type="text/javascript">
       $(document).ready(function()
       {
-        
+
+        cargarProfesores();
+
         $("#btnRegistrar").click(function(event)
         {
           event.preventDefault();
@@ -18,10 +20,13 @@
           else
           {
             agregarGrupo();
-          }
-          
+          }          
         });
 
+      });
+
+      function cargarProfesores()
+      {
         $.ajax(
         {
           url: 'INC/SeleccionProfesor.php',
@@ -36,50 +41,34 @@
             {
               $("#Profesor").append("<option value='"+p.iIDProfesor_Pro+"'>"+p.vNombre_Pro+" "+p.vApellidoPaterno_Pro+"</option>");
             }
-          })
-        })
-        .fail(function()
-        {
-          console.log("Error");
-        })
-        .always(function()
-        {
-          console.log("Completo");
-        });
-
-        function agregarGrupo()
-        {
-          $.ajax(
-          {
-            url: 'INC/InsertarGrupo.php',
-            type: 'POST',
-            datatype: 'json',
-            data: $("#frmGrupo").serialize(),
-          })
-          .done(function(r)
-          {
-            if(r.Resultado==1)
-            {
-              alert("El grupo se registro correctamente.");
-              $("#Nombre").val("");
-              $("#Profesor").val(1);
-            }
-            else
-            {
-              alert("Error =(");
-            }
-          })
-          .fail(function()
-          {
-            console.log("Error");
-          })
-          .always(function()
-          {
-            console.log("Completo");
           });
-        }
+        });
+      }
 
-    });
+      function agregarGrupo()
+      {
+        $.ajax(
+        {
+          url: 'INC/InsertarGrupo.php',
+          type: 'POST',
+          datatype: 'json',
+          data: $("#frmGrupo").serialize(),
+        })
+        .done(function(r)
+        {
+          if(r.Resultado==1)
+          {
+            alert("El grupo se registro correctamente.");
+            $("#Nombre").val("");
+            $("#Profesor").val(1);
+          }
+          else
+          {
+            alert("Error =(");
+          }
+        });
+      }
+
   </script>
   </head>
   <body>
