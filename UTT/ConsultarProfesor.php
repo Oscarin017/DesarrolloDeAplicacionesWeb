@@ -8,46 +8,81 @@
     		$(document).ready(function()
 			{
 
-		        $("#Buscar").click(function(event)
+		        $("#btnBuscar").click(function(event)
 	    		{
+	    			event.preventDefault();
 	    			limpiarTabla();
 	    			llenarTabla();
 	    		}); 
 
-	    		$("#tbAlumno").on("click", "button", function(event)
+	    		$("#tbProfesor").on("click", "button", function(event)
 	    		{
-	    			insertarGruAlu($("#Grupo").val(), $(this).val())
+	    			if($(this).html() == "Modificar")
+	    			{}
+	    			else if($(this).html() == "Eliminar")
+	    			{
+	    				if(confirm("Estas seguro que deseas eliminar este Profesor"))
+	    				{
+	    					eliminarProfesor($(this).val());
+	    					limpiarTabla();
+	    					llenarTabla();
+	    				}
+	    			}
 	    		});	 
 
 		    });
 			
-			function llenarTablaAlumno()
+			function llenarTabla()
 			{
 				$.ajax(
 		        {
 		        	url: 'INC/SeleccionProfesor2.php',
 		          	type: 'POST',
 		          	datatype: 'json',
+		          	data: $("#frmProfesor").serialize(),
 		        })
 		        .done(function(r)
 		        {
-		          	$.each(r, function(index, a)
+		          	$.each(r, function(index, p)
 		          	{
-		            	$("#tbAlumno tbody").append("<tr>\
-		            		<td>"+a.iIDProfesor_Pro+"</td>\
-		            		<td>"+a.vApellidoPaterno_Pro+" "+a.vApellidoMaterno_Pro+" "+a.vNombre_Pro+"</td>\
-		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDProfesor_Pro+"'>Agregar</button></td>\
-		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDProfesor_Pro+"'>Agregar</button></td>\
-		            		</tr>");
+		          		if(p.iIDProfesor_Pro != 1)
+            			{              
+			            	$("#tbProfesor tbody").append("<tr>\
+			            		<td>"+p.iIDProfesor_Pro+"</td>\
+			            		<td>"+p.vApellidoPaterno_Pro+" "+p.vApellidoMaterno_Pro+" "+p.vNombre_Pro+"</td>\
+			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
+			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Eliminar</button></td>\
+			            		</tr>");
+		            	}
 		          	});
-		        })
-		        .fail(function()
+		        });
+
+			}
+
+			function eliminarProfesor(IDPro)
+			{
+				var jProfesor={IDProfesor: IDPro,};
+
+				$.ajax(
 		        {
-		          	console.log("Error");
+		        	url: 'INC/EliminarProfesor.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jProfesor,
 		        })
-		        .always(function()
+		        .done(function(r)
 		        {
-		          	console.log("Completo");
+		          	$.each(r, function(index, p)
+		          	{
+		          		if(r.Resultado==1)
+          				{
+            				alert("El profesor se elimino correctamente.");
+          				}
+          				else
+          				{
+            				alert("Error =(");
+          				}
+		          	});
 		        });
 			}
 
@@ -82,13 +117,13 @@
 				      	</div>
 			          	<div class="col-md-4">
 				            <div class="form-group">
-				           		<label for="Ape_Pat">Ape_Pat</label>
+				           		<label for="Ape_Pat">Apellido Paterno</label>
 				                <input type="text" name="Ape_Pat" class="form-control" id="Ape_Pat" placeholder="Apellido Paterno">
 				          	</div>
 			          	</div>
 			          	<div class="col-md-12">
               				<button class="btn btn-lg btn-success" id="btnBuscar">Buscar</button>
-            				</div>
+            			</div>
           			</form>
           			<table class="table" id="tbProfesor">
           				<thead>

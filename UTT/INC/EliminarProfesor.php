@@ -8,7 +8,7 @@
 
 	$mDatos =new Modelo(); 
 	$mDatos->conectar();
-	$R=$mDatos->Modificar("insert into Grupo values ('', '".$Nombre."', '1', '".$Profesor."')");
+	$R=$mDatos->Modificar("update profesor set bActivo_Pro=0 where iIDProfesor_Pro=".$IDProfesor);
 	$Re=array('Resultado' =>$R);
 
 	echo json_encode($Re);
