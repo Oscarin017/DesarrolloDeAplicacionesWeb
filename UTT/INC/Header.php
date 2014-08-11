@@ -24,14 +24,14 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Alumnos<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="RegistroAlumno.php">Registrar</a></li>
-						<li><a href="#">Consultar</a></li>
+						<li><a href="ConsultarAlumno.php">Consultar</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Grupos<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="RegistroGrupo.php">Registrar</a></li>
-						<li><a href="#">Consultar</a></li>
+						<li><a href="ConsultarGrupo.php">Consultar</a></li>
 						<li><a href="AlumnoGrupo.php">Asignacion Alumnos-Grupos</a></li>
 					</ul>
 				</li>

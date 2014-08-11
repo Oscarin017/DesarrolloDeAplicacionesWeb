@@ -15,15 +15,15 @@
 	    			llenarTabla();
 	    		}); 
 
-	    		$("#tbProfesor").on("click", "button", function(event)
+	    		$("#tbAlumno").on("click", "button", function(event)
 	    		{
 	    			if($(this).html() == "Modificar")
 	    			{}
 	    			else if($(this).html() == "Eliminar")
 	    			{
-	    				if(confirm("Estas seguro que deseas eliminar este Profesor"))
+	    				if(confirm("Estas seguro que deseas eliminar este Alumno"))
 	    				{
-	    					eliminarProfesor($(this).val());
+	    					eliminarAlumno($(this).val());
 	    					limpiarTabla();
 	    					llenarTabla();
 	    				}
@@ -36,39 +36,37 @@
 			{
 				$.ajax(
 		        {
-		        	url: 'INC/SeleccionProfesor2.php',
+		        	url: 'INC/SeleccionAlumno2.php',
 		          	type: 'POST',
 		          	datatype: 'json',
-		          	data: $("#frmProfesor").serialize(),
+		          	data: $("#frmAlumno").serialize(),
 		        })
 		        .done(function(r)
 		        {
-		          	$.each(r, function(index, p)
+		          	$.each(r, function(index, a)
 		          	{
-		          		if(p.iIDProfesor_Pro != 1)
-            			{              
-			            	$("#tbProfesor tbody").append("<tr>\
-			            		<td>"+p.iIDProfesor_Pro+"</td>\
-			            		<td>"+p.vApellidoPaterno_Pro+" "+p.vApellidoMaterno_Pro+" "+p.vNombre_Pro+"</td>\
-			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
-			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Eliminar</button></td>\
-			            		</tr>");
-		            	}
+		          		$("#tbAlumno tbody").append("<tr>\
+		            		<td>"+a.iIDAlumno_Alu+"</td>\
+		            		<td>"+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+" "+a.vNombre_Alu+"</td>\
+		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Modificar</button></td>\
+		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Eliminar</button></td>\
+		            		</tr>");
+	            	
 		          	});
 		        });
 
 			}
 
-			function eliminarProfesor(IDPro)
+			function eliminarAlumno(IDAlu)
 			{
-				var jProfesor={IDProfesor: IDPro,};
+				var jAlumno={IDAlumno: IDAlu,};
 
 				$.ajax(
 		        {
-		        	url: 'INC/EliminarProfesor.php',
+		        	url: 'INC/EliminarAlumno.php',
 		          	type: 'POST',
 		          	datatype: 'json',
-		          	data: jProfesor,
+		          	data: jAlumno,
 		        })
 		        .done(function(r)
 		        {
@@ -76,7 +74,7 @@
 		          	{
 		          		if(r.Resultado==1)
           				{
-            				alert("El profesor se elimino correctamente.");
+            				alert("El Alumno se elimino correctamente.");
           				}
           				else
           				{
@@ -88,7 +86,7 @@
 
 			function limpiarTabla()
 			{
-				$("#tbProfesor tbody").html("");
+				$("#tbAlumno tbody").html("");
 			}
 	
     	</script>
@@ -98,15 +96,15 @@
       		require 'INC/Header.php';
     	?>
     	<div class="container">
-      		<h1><span class="label label-primary">Consulta Profesores</span></h1>
+      		<h1><span class="label label-primary">Consulta Alumnos</span></h1>
       		<br/>
       		<div class="jumbotron">
         		<div class="container">
-          			<form action="" role="form" class="form-horizontal" id="frmProfesor">
+          			<form action="" role="form" class="form-horizontal" id="frmAlumno">
           				<div class="col-md-4">
 	            			<div class="form-group">
-				                <label for="IDProfesor">ID Profesor</label>
-				                <input type="text" name="IDProfesor" class="form-control" id="IDProfesor" placeholder="ID del Profesor">
+				                <label for="IDAlumno">ID Alumno</label>
+				                <input type="text" name="IDAlumno" class="form-control" id="IDAlumno" placeholder="ID del Alumno">
 				           	</div>
 				       	</div>
 				       	<div class="col-md-4">
@@ -125,10 +123,10 @@
               				<button class="btn btn-lg btn-success" id="btnBuscar">Buscar</button>
             			</div>
           			</form>
-          			<table class="table" id="tbProfesor">
+          			<table class="table" id="tbAlumno">
           				<thead>
           					<tr>
-          						<th>ID Profesor</th>
+          						<th>ID Alumno</th>
           						<th>Nombre Completo</th>
           						<th></th>
           						<th></th>

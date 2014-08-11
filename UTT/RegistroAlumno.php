@@ -5,6 +5,7 @@
       require 'INC/Head.php';
     ?>
     <script type="text/javascript">
+    
       $(document).ready(function()
       {
         
