@@ -167,32 +167,35 @@
       		<div class="jumbotron">
         		<div class="container">
           			<form action="" role="form" class="form-horizontal" id="frmGrupo">
-            			<div class="col-md-6">
+            			<div class="col-md-12">
+            				<h2>Selecciona un Grupo</h2>
               				<div class="form-group">
-                				<label for="Grupo">Grupo</label>
-                				<select class="form-control" id="Grupo" name="Grupo"></select>
+                				<select class="form-control input-lg" id="Grupo" name="Grupo"></select>
               				</div>
-            			</div>
-            			<div class="hidden-sm hidden-xs col-md-6">
-              				<img class="img-responsive" src="IMG/Grupos.jpg" alt="">
+              				<br>
             			</div>
           			</form>
-          			<table class="table" id="tbAlumnoGrupo">
+          			<div class="col-md-6">
+          				<h2>Alumnos en el Grupo</h2>
+          				<table class="table table-responsive" id="tbAlumnoGrupo">
           				<thead>
           					<tr>
-          						<th>ID Alumno</th>
+          						<th>ID</th>
           						<th>Nombre Completo</th>
           					</tr>
           				</thead>
           				<tbody>
           				</tbody>
           			</table>
-          			<table class="table" id="tbAlumno">
+          			</div>
+          			<div class="col-md-6">
+          				<h2>Todos los Alumnos</h2>
+          				<table class="table table-responsive" id="tbAlumno">
           				<thead>
           					<tr>
-          						<th>ID Alumno</th>
-          						<th>Apellido Paterno</th>
-          						<th>Apellido Materno</th>
+          						<th>ID</th>
+          						<th>A.Paterno</th>
+          						<th>A.Materno</th>
           						<th>Nombre</th>
           						<th></th>
           					</tr>
@@ -200,6 +203,7 @@
           				<tbody>
           				</tbody>
           			</table>
+          			</div>
         		</div>
       		</div>
     	</div>
