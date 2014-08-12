@@ -15,15 +15,6 @@
 	{
 		$bConsulta=true;
 		$sConsulta.="(vNombre_Gru like '%".$Nombre."%')";
-		if($IDProfesor!="" || $NombreP!="")
-		{
-			$sConsulta.=" || ";
-		}
-	}
-	if($IDProfesor!="")
-	{
-		$bConsulta=true;
-		$sConsulta.="(iIDProfesor_Pro=".$IDProfesor.")";
 		if($NombreP!="")
 		{
 			$sConsulta.=" || ";

@@ -4,9 +4,10 @@
      		require 'INC/Head.php';
     	?>
     	<script type="text/javascript">
+    	
     		$(document).ready(function()
 			{
-
+				
 				cargarGrupo();
 				llenarTablaAlumno();	
 
@@ -49,15 +50,7 @@
         			{
           				alert("Error =(");
         			}
-    			})
-	        	.fail(function()
-	        	{
-	          		console.log("Error");
-	        	})
-	        	.always(function()
-	        	{
-	          		console.log("Completo");
-	        	});
+    			});
 			}
 
 			function cargarGrupo()
@@ -74,15 +67,6 @@
 		          	{
 		            	$("#Grupo").append("<option value='"+g.iIDGrupo_Gru+"'>"+g.vNombre_Gru+"</option>");
 		          	});
-		        })
-		        .fail(function()
-		        {
-		          	console.log("Error");
-		        })
-		        .always(function()
-		        {
-		        	llenarTablaGrupo($("#Grupo").val());
-		          	console.log("Completo");
 		        });
 			}
 
@@ -106,14 +90,6 @@
 		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Agregar</button></td>\
 		            		</tr>");
 		          	});
-		        })
-		        .fail(function()
-		        {
-		          	console.log("Error");
-		        })
-		        .always(function()
-		        {
-		          	console.log("Completo");
 		        });
 			}
 
@@ -139,15 +115,7 @@
 	            		<td>"+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+" "+a.vNombre_Alu+"</td>\
 	            		</tr>");
 	          		});
-    			})
-	        	.fail(function()
-	        	{
-	          		console.log("Error");
-	        	})
-	        	.always(function()
-	        	{
-	          		console.log("Completo");
-	        	});
+    			});
 			}
 
 			function limpiarTablaGrupo()

@@ -21,7 +21,7 @@
 	    			{}
 	    			else if($(this).html() == "Eliminar")
 	    			{
-	    				if(confirm("Estas seguro que deseas eliminar este Profesor"))
+	    				if(confirm("Estas seguro que deseas eliminar este Grupo"))
 	    				{
 	    					eliminarGrupo($(this).val());
 	    					limpiarTabla();
@@ -59,7 +59,26 @@
 
 			function eliminarGrupo(IDGru)
 			{
-				
+				var jGrupo={IDGrupo: IDGru,};
+
+				$.ajax(
+		        {
+		        	url: 'INC/EliminarGrupo.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jGrupo,
+		        })
+		        .done(function(r)
+		        {
+		          	if(r.Resultado==1)
+          			{
+            			alert("El grupo se elimino correctamente.");
+          			}
+          			else
+          			{
+            			alert("Error =(");
+          			}
+		        });
 			}
 
 			function limpiarTabla()
@@ -85,12 +104,6 @@
 				                <input type="text" name="Nombre" class="form-control" id="Nombre" placeholder="Nombre">
 				          	</div>
 				      	</div>
-          				<div class="col-md-4">
-	            			<div class="form-group">
-				                <label for="IDProfesor">ID Profesor</label>
-				                <input type="text" name="IDProfesor" class="form-control" id="IDProfesor" placeholder="ID del Profesor">
-				           	</div>
-				       	</div>
 				       	<div class="col-md-4">
 	            			<div class="form-group">
 				           		<label for="NombreP">Nombre Profesor</label>
