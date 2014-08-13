@@ -50,11 +50,15 @@
 			            	$("#tbProfesor tbody").append("<tr>\
 			            		<td>"+p.iIDProfesor_Pro+"</td>\
 			            		<td>"+p.vApellidoPaterno_Pro+" "+p.vApellidoMaterno_Pro+" "+p.vNombre_Pro+"</td>\
-			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
+			            		<td><button class='btn btn-sm btn-primary mmProfesor' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
 			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Eliminar</button></td>\
 			            		</tr>");
 		            	}
 		          	});
+		          	$(".mmProfesor").click(function(btn){
+		          		$('#modificarProfesores').modal('show')
+		          		
+		          	})
 		        });
 
 			}
@@ -94,6 +98,9 @@
     	</script>
 	</head>
 	<body>
+		<?php 
+      		require 'ProfesorModal.php';
+    	?>
 		<?php 
       		require 'INC/Header.php';
     	?>

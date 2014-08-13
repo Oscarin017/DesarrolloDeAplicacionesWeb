@@ -55,13 +55,14 @@
 		          	});
 		          	$(".mmGrupo").click(function(btn){
 		          		$('#modificarGrupos').modal('show')
-		          		cargarProfesores();
+		          		cargarModal(btn.val());
 		          	})
 		        });
 			}
 
 			function cargarModal(id){
-				
+				cargarProfesores();
+
 			}
 
 			function eliminarGrupo(IDGru)
