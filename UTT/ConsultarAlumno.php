@@ -70,17 +70,14 @@
 		        })
 		        .done(function(r)
 		        {
-		          	$.each(r, function(index, p)
-		          	{
-		          		if(r.Resultado==1)
-          				{
-            				alert("El Alumno se elimino correctamente.");
-          				}
-          				else
-          				{
-            				alert("Error =(");
-          				}
-		          	});
+		          	if(r.Resultado==1)
+      				{
+        				alert("El Alumno se elimino correctamente.");
+      				}
+      				else
+      				{
+        				alert("Error =(");
+      				}
 		        });
 			}
 

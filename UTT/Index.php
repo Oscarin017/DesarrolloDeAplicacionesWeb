@@ -8,6 +8,11 @@
     		
     		$(document).ready(function()
 			{
+                if(sessionStorage.IDProfesor)
+                {
+                    window.location = "Main.php";
+                }
+
 				$("#btnSubmit").click(function(event)
 				{
 					event.preventDefault();
@@ -31,7 +36,8 @@
                     $.each(r, function(index, p)
                     {
                         if(p.vPassword_Pro == $("#Password").val())
-                        {
+                        {                 
+                            sessionStorage.IDProfesor = p.iIDProfesor_Pro;
                             window.location = "Main.php";
                         }
                         else
