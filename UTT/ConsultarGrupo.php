@@ -66,9 +66,10 @@
 		        });
 			}
 
-			function cargarModal(IDGru)
-			{			
-				cargarGrupo(IDGru);
+			
+			function cargarModal(id){
+				cargarProfesores();
+
 			}
 
 			function cargarProfesores()

@@ -48,11 +48,14 @@
 		          		$("#tbAlumno tbody").append("<tr>\
 		            		<td>"+a.iIDAlumno_Alu+"</td>\
 		            		<td>"+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+" "+a.vNombre_Alu+"</td>\
-		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Modificar</button></td>\
+		            		<td><button class='btn btn-sm btn-primary mmAlumno' value='"+a.iIDAlumno_Alu+"'>Modificar</button></td>\
 		            		<td><button class='btn btn-sm btn-primary' value='"+a.iIDAlumno_Alu+"'>Eliminar</button></td>\
 		            		</tr>");
 	            	
 		          	});
+		          	$(".mmAlumno").click(function(btn){
+		          		$('#modificarAlumnos').modal('show')
+		          	})
 		        });
 
 			}
@@ -89,6 +92,9 @@
     	</script>
 	</head>
 	<body>
+		<?php 
+      		require 'AlumnoModal.php';
+    	?>
 		<?php 
       		require 'INC/Header.php';
     	?>
