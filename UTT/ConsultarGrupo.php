@@ -7,6 +7,7 @@
 
     		$(document).ready(function()
 			{
+				cargarProfesores();
 
 		        $("#btnBuscar").click(function(event)
 	    		{
@@ -18,7 +19,10 @@
 	    		$("#tbGrupo").on("click", "button", function(event)
 	    		{
 	    			if($(this).html() == "Modificar")
-	    			{}
+	    			{
+	    				$("#mGrupo").modal("show");
+		       			cargarModal($(this).val());
+	    			}
 	    			else if($(this).html() == "Eliminar")
 	    			{
 	    				if(confirm("Estas seguro que deseas eliminar este Grupo"))
@@ -30,6 +34,12 @@
 	    			}
 	    		});	 
 
+	    		$("#btnGuardar").click(function(event)
+	    		{
+	    			modificarGrupo($(this).val());
+	    			$("#mGrupo").modal("hide");
+	    			limpiarTabla();
+	    		});
 		    });
 			
 			function llenarTabla()
@@ -49,43 +59,16 @@
 		            		<td>"+g.iIDGrupo_Gru+"</td>\
 		            		<td>"+g.vNombre_Gru+"</td>\
 		            		<td>"+g.vApellidoPaterno_Pro+" "+g.vApellidoMaterno_Pro+" "+g.vNombre_Pro+"</td>\
-		            		<td><button class='btn btn-sm btn-primary mmGrupo' value='"+g.iIDGrupo_Gru+"'>Modificar</button></td>\
+		            		<td><button class='btn btn-sm btn-primary' value='"+g.iIDGrupo_Gru+"'>Modificar</button></td>\
 		            		<td><button class='btn btn-sm btn-primary' value='"+g.iIDGrupo_Gru+"'>Eliminar</button></td>\
 		            		</tr>");
 		          	});
-		          	$(".mmGrupo").click(function(btn){
-		          		$('#modificarGrupos').modal('show')
-		          		cargarProfesores();
-		          	})
 		        });
 			}
 
-			function cargarModal(id){
-				
-			}
-
-			function eliminarGrupo(IDGru)
-			{
-				var jGrupo={IDGrupo: IDGru,};
-
-				$.ajax(
-		        {
-		        	url: 'INC/EliminarGrupo.php',
-		          	type: 'POST',
-		          	datatype: 'json',
-		          	data: jGrupo,
-		        })
-		        .done(function(r)
-		        {
-		          	if(r.Resultado==1)
-          			{
-            			alert("El grupo se elimino correctamente.");
-          			}
-          			else
-          			{
-            			alert("Error =(");
-          			}
-		        });
+			function cargarModal(IDGru)
+			{			
+				cargarGrupo(IDGru);
 			}
 
 			function cargarProfesores()
@@ -108,6 +91,77 @@
         		});
       		}
 
+      		function cargarGrupo(IDGru)
+      		{
+      			var jGrupo={IDGrupo: IDGru,};
+      			$.ajax(
+		        {
+		        	url: 'INC/SeleccionGrupo3.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jGrupo,
+		        })
+		        .done(function(r)
+		        {
+		          	$.each(r, function(index, g)
+		          	{
+		          		$("#mNombre").val(g.vNombre_Gru);
+		          		$("#mProfesor").val(g.iIDProfesor_Gru);
+		          		$("#btnGuardar").val(g.iIDGrupo_Gru);
+		          	});
+		        });
+      		}
+
+      		function modificarGrupo(IDGru)
+			{
+				var jGrupo=
+					{
+						IDGrupo: IDGru,
+						Nombre: $("#mNombre").val(),
+						Profesor: $("#mProfesor").val(),
+					};
+				$.ajax(
+		        {
+		        	url: 'INC/ModificarGrupo.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jGrupo,
+		        })
+		        .done(function(r)
+		        {
+		          	if(r.Resultado==1)
+          			{
+            			alert("El grupo se modifico correctamente.");
+          			}
+          			else
+          			{
+            			alert("Error =(");
+          			}
+		        });
+			}
+
+      		function eliminarGrupo(IDGru)
+			{
+				var jGrupo={IDGrupo: IDGru,};
+				$.ajax(
+		        {
+		        	url: 'INC/EliminarGrupo.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jGrupo,
+		        })
+		        .done(function(r)
+		        {
+		          	if(r.Resultado==1)
+          			{
+            			alert("El grupo se elimino correctamente.");
+          			}
+          			else
+          			{
+            			alert("Error =(");
+          			}
+		        });
+			}
 
 			function limpiarTabla()
 			{
