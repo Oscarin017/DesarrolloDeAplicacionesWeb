@@ -18,7 +18,10 @@
 	    		$("#tbProfesor").on("click", "button", function(event)
 	    		{
 	    			if($(this).html() == "Modificar")
-	    			{}
+	    			{
+	    				$("#mProfesor").modal("show");
+	    				cargarProfesor($(this).val());
+	    			}
 	    			else if($(this).html() == "Eliminar")
 	    			{
 	    				if(confirm("Estas seguro que deseas eliminar este Profesor"))
@@ -29,6 +32,13 @@
 	    				}
 	    			}
 	    		});	 
+
+	    		$("#btnGuardar").click(function(event)
+	    		{
+	    			modificarProfesor($(this).val());
+	    			$("#mProfesor").modal("hide");
+	    			limpiarTabla();
+	    		});
 
 		    });
 			
@@ -50,23 +60,77 @@
 			            	$("#tbProfesor tbody").append("<tr>\
 			            		<td>"+p.iIDProfesor_Pro+"</td>\
 			            		<td>"+p.vApellidoPaterno_Pro+" "+p.vApellidoMaterno_Pro+" "+p.vNombre_Pro+"</td>\
-			            		<td><button class='btn btn-sm btn-primary mmProfesor' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
+			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Modificar</button></td>\
 			            		<td><button class='btn btn-sm btn-primary' value='"+p.iIDProfesor_Pro+"'>Eliminar</button></td>\
 			            		</tr>");
 		            	}
 		          	});
-		          	$(".mmProfesor").click(function(btn){
-		          		$('#modificarProfesores').modal('show')
-		          		
-		          	})
 		        });
+			}
 
+			function cargarProfesor(IDPro)
+			{
+				var jProfesor=
+				{
+					IDProfesor: IDPro,
+					Nombre: "",
+					Ape_Pat: "",
+				};
+      			$.ajax(
+		        {
+		        	url: 'INC/SeleccionProfesor2.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jProfesor,
+		        })
+		        .done(function(r)
+		        {
+		          	$.each(r, function(index, p)
+		          	{
+		          		$("#mNombre").val(p.vNombre_Pro);
+		          		$("#mApe_Pat").val(p.vApellidoPaterno_Pro);
+		          		$("#mApe_Mat").val(p.vApellidoMaterno_Pro);
+		          		$("#mEmail").val(p.vCorreo_Pro);
+		          		$("#mTelefono").val(p.cTelefono_Pro);		          		
+		          		$("#btnGuardar").val(p.iIDProfesor_Pro);
+		          	});
+		        });
+			}
+
+			function modificarProfesor(IDPro)
+			{
+				var jProfesor=
+					{
+						IDProfesor: IDPro,
+						Nombre: $("#mNombre").val(),
+						Ape_Pat: $("#mApe_Pat").val(),
+		          		Ape_Mat: $("#mApe_Mat").val(),
+		          		Email: $("#mEmail").val(),
+		          		Telefono: $("#mTelefono").val(),
+					};
+				$.ajax(
+		        {
+		        	url: 'INC/ModificarProfesor.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jProfesor,
+		        })
+		        .done(function(r)
+		        {
+		          	if(r.Resultado==1)
+          			{
+            			alert("El profesor se modifico correctamente.");
+          			}
+          			else
+          			{
+            			alert("Error =(");
+          			}
+		        });
 			}
 
 			function eliminarProfesor(IDPro)
 			{
 				var jProfesor={IDProfesor: IDPro,};
-
 				$.ajax(
 		        {
 		        	url: 'INC/EliminarProfesor.php',

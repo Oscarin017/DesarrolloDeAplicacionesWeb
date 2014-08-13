@@ -18,7 +18,10 @@
 	    		$("#tbAlumno").on("click", "button", function(event)
 	    		{
 	    			if($(this).html() == "Modificar")
-	    			{}
+	    			{
+	    				$("#mAlumno").modal("show");
+	    				cargarAlumno($(this).val());
+	    			}
 	    			else if($(this).html() == "Eliminar")
 	    			{
 	    				if(confirm("Estas seguro que deseas eliminar este Alumno"))
@@ -29,6 +32,13 @@
 	    				}
 	    			}
 	    		});	 
+
+	    		$("#btnGuardar").click(function(event)
+	    		{
+	    			modificarAlumno($(this).val());
+	    			$("#mAlumno").modal("hide");
+	    			limpiarTabla();
+	    		});
 
 		    });
 			
@@ -53,17 +63,72 @@
 		            		</tr>");
 	            	
 		          	});
-		          	$(".mmAlumno").click(function(btn){
-		          		$('#modificarAlumnos').modal('show')
-		          	})
 		        });
+			}
 
+			function cargarAlumno(IDAlu)
+			{
+				var jAlumno=
+				{
+					IDAlumno: IDAlu,
+					Nombre: "",
+					Ape_Pat: "",
+				};
+      			$.ajax(
+		        {
+		        	url: 'INC/SeleccionAlumno2.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jAlumno,
+		        })
+		        .done(function(r)
+		        {
+		          	$.each(r, function(index, p)
+		          	{
+		          		$("#mNombre").val(p.vNombre_Alu);
+		          		$("#mApe_Pat").val(p.vApellidoPaterno_Alu);
+		          		$("#mApe_Mat").val(p.vApellidoMaterno_Alu);
+		          		$("#mEmail").val(p.vCorreo_Alu);
+		          		$("#mEmailT").val(p.vCorreoContacto_Alu);		          		
+		          		$("#btnGuardar").val(p.iIDAlumno_Alu);
+		          	});
+		        });
+			}
+
+			function modificarAlumno(IDAlu)
+			{
+				var jAlumno=
+					{
+						IDAlumno: IDAlu,
+						Nombre: $("#mNombre").val(),
+						Ape_Pat: $("#mApe_Pat").val(),
+		          		Ape_Mat: $("#mApe_Mat").val(),
+		          		Email: $("#mEmail").val(),
+		          		EmailT: $("#mEmailT").val(),
+					};
+				$.ajax(
+		        {
+		        	url: 'INC/ModificarAlumno.php',
+		          	type: 'POST',
+		          	datatype: 'json',
+		          	data: jAlumno,
+		        })
+		        .done(function(r)
+		        {
+		          	if(r.Resultado==1)
+          			{
+            			alert("El alumno se modifico correctamente.");
+          			}
+          			else
+          			{
+            			alert("Error =(");
+          			}
+		        });
 			}
 
 			function eliminarAlumno(IDAlu)
 			{
 				var jAlumno={IDAlumno: IDAlu,};
-
 				$.ajax(
 		        {
 		        	url: 'INC/EliminarAlumno.php',
