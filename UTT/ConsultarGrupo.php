@@ -21,7 +21,7 @@
 	    			if($(this).html() == "Modificar")
 	    			{
 	    				$("#mGrupo").modal("show");
-		       			cargarModal($(this).val());
+		       			cargarGrupo($(this).val());
 	    			}
 	    			else if($(this).html() == "Eliminar")
 	    			{
@@ -64,12 +64,6 @@
 		            		</tr>");
 		          	});
 		        });
-			}
-
-			
-			function cargarModal(id){
-				cargarProfesores();
-
 			}
 
 			function cargarProfesores()
