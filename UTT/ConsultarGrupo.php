@@ -49,12 +49,19 @@
 		            		<td>"+g.iIDGrupo_Gru+"</td>\
 		            		<td>"+g.vNombre_Gru+"</td>\
 		            		<td>"+g.vApellidoPaterno_Pro+" "+g.vApellidoMaterno_Pro+" "+g.vNombre_Pro+"</td>\
-		            		<td><button class='btn btn-sm btn-primary' value='"+g.iIDGrupo_Gru+"'>Modificar</button></td>\
+		            		<td><button class='btn btn-sm btn-primary mmGrupo' value='"+g.iIDGrupo_Gru+"'>Modificar</button></td>\
 		            		<td><button class='btn btn-sm btn-primary' value='"+g.iIDGrupo_Gru+"'>Eliminar</button></td>\
 		            		</tr>");
 		          	});
+		          	$(".mmGrupo").click(function(btn){
+		          		$('#modificarGrupos').modal('show')
+		          		cargarProfesores();
+		          	})
 		        });
+			}
 
+			function cargarModal(id){
+				
 			}
 
 			function eliminarGrupo(IDGru)
@@ -81,6 +88,27 @@
 		        });
 			}
 
+			function cargarProfesores()
+      		{
+      			$.ajax(
+        		{	
+          			url: 'INC/SeleccionProfesor.php',
+          			type: 'POST',
+          			datatype: 'json',
+        		})
+        		.done(function(r)
+        		{
+          			$.each(r, function(index, p)
+          			{
+            			if(p.iIDProfesor_Pro != 1)
+            			{
+              				$("#mProfesor").append("<option value='"+p.iIDProfesor_Pro+"'>"+p.vNombre_Pro+" "+p.vApellidoPaterno_Pro+"</option>");
+            			}
+          			});
+        		});
+      		}
+
+
 			function limpiarTabla()
 			{
 				$("#tbGrupo tbody").html("");
@@ -89,6 +117,9 @@
     	</script>
 	</head>
 	<body>
+		<?php 
+      		require 'GrupoModal.php';
+    	?>
 		<?php 
       		require 'INC/Header.php';
     	?>
