@@ -47,6 +47,11 @@
 		{	
 			return json_encode($this->Select("select * from ".$Tabla." ".$Condicion));
 		}
+
+		public function Seleccionar2($Campo, $Tabla, $Condicion)
+		{	
+			return json_encode($this->Select("select ".$Campo." from ".$Tabla." ".$Condicion));
+		}
 		
 		public function Insertar($SQL)
 		{

@@ -11,7 +11,7 @@
 	$mail->SMTPSecure = 'ssl';
 	$mail->From = 'hector.glez4@gmail.com';
 	$mail->FromName = 'Hector Gonzalez Gonzalez';
-	$mail->addAddress('racso_1992@hotmail.com', 'Oscar Gonzalez');
+	$mail->addAddress('hector.glez4@gmail.com', 'Hector Gonzalez');
 	$mail->isHTML(true);                              
 	$mail->Subject = 'Correo de Prueba';
 	$mail->Body    = '<h1>Correo de Prueba</h1>';

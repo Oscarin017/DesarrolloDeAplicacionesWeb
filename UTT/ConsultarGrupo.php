@@ -18,6 +18,7 @@
 
 	    		$("#tbGrupo").on("click", "button", function(event)
 	    		{
+	    			event.preventDefault();
 	    			if($(this).html() == "Modificar")
 	    			{
 	    				$("#mGrupo").modal("show");
@@ -36,6 +37,7 @@
 
 	    		$("#btnGuardar").click(function(event)
 	    		{
+	    			event.preventDefault();
 	    			modificarGrupo($(this).val());
 	    			$("#mGrupo").modal("hide");
 	    			limpiarTabla();

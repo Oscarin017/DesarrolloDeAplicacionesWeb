@@ -17,6 +17,7 @@
 
 	    		$("#tbProfesor").on("click", "button", function(event)
 	    		{
+	    			event.preventDefault();
 	    			if($(this).html() == "Modificar")
 	    			{
 	    				$("#mProfesor").modal("show");
@@ -35,6 +36,7 @@
 
 	    		$("#btnGuardar").click(function(event)
 	    		{
+	    			event.preventDefault();
 	    			modificarProfesor($(this).val());
 	    			$("#mProfesor").modal("hide");
 	    			limpiarTabla();
