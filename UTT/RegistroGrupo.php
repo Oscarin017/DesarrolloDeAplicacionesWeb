@@ -19,7 +19,14 @@
           }
           else
           {
-            agregarGrupo();
+            if($("#Nombre").val() == "")
+            {
+              alert("Ingresa el nombre del grupo.")
+            }
+            else
+            {
+              agregarGrupo();
+            }
           }          
         });
 

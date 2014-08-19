@@ -4,7 +4,7 @@
       require 'INC/Head.php';
     ?>
     <script type="text/javascript">
-      var enviarCorreos =  false;
+    
       $(document).ready(function()
       {
 
@@ -22,20 +22,14 @@
           if($(this).html() == "Presente")
           {
             $(this).html("Falta");
-            $(this).removeClass("btn-success");
-            $(this).addClass("btn-danger");
           }
           else if($(this).html() == "Falta")
           {
             $(this).html("Retardo");
-            $(this).removeClass("btn-danger");
-            $(this).addClass("btn-warning");
           }
           else
           {
             $(this).html("Presente");
-            $(this).removeClass("btn-warning");
-            $(this).addClass("btn-success");
           }
         }); 
 
@@ -46,7 +40,6 @@
           {
             if(confirm("Estas seguro que deseas guardar la asistencia."))
             {
-              enviarCorreos = confirm("Deseas enviar correo a los tutores.")
               guardarAsistencia();
             }
           }
@@ -96,8 +89,8 @@
           {
             $("#tbAlumno tbody").append("<tr>\
               <td>"+a.iIDAlumno_Alu+"</td>\
-              <td id="+a.IDGrupoAlumno+">"+a.vNombre_Alu+" "+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+"</td>\
-              <td><button class='btn btn-md btn-success btnasis' name='btn' value='"+a.iIDGrupoAlumno_GA+"'>Presente</button><input id='ca"+a.IDGrupoAlumno+"' type='hidden' value="+a.vCorreo_Alu+"></input><input id='ct"+a.IDGrupoAlumno+"' type='hidden' value="+a.vCorreoContacto_Alu+"></input></td>\
+              <td>"+a.vNombre_Alu+" "+a.vApellidoPaterno_Alu+" "+a.vApellidoMaterno_Alu+"</td>\
+              <td><button class='btn btn-sm btn-primary' name='btn' value='"+a.iIDGrupoAlumno_GA+"'>Presente</button></td>\
               </tr>");
           });
         });
@@ -107,18 +100,11 @@
       {
         $("#tbAlumno tbody tr td button").each(function(index)
         {
-          idalum = "td#"+$(this).val();
-          idcoa = "#ca" + $(this).val();
-          idcot = "#ct" + $(this).val();
           var jAsistencia =
           {
             IDGrupoAlumno: $(this).val(),
             Fecha: $("#Fecha").val(),
             Asistencia: $(this).html(),
-            Alumno: $(idalum).html(),
-            Grupo: $("#Grupo").html(),
-            Correo: $(idcoa).val(),
-            CorreoT: $(idcot).val(),
           }
           $.ajax(
           {
@@ -138,19 +124,9 @@
             {
               alert("Error =(");
             }
-          });
-
-          if(enviarCorreos)
-          {
-            $.ajax({
-              url: 'INC/EnviarCorreos.php',
-              type: 'POST',
-              datatype: 'json',
-              data: jAsistencia,
-            })
-          }
-
+          });   
         });
+        alert("Asistencia guardada exitosamente");
       }
 
       function limpiarTabla()
@@ -199,8 +175,8 @@
           <tbody>
           </tbody>
         </table>
-        <div class="col-md-12 text-center">
-          <button class="btn btn-lg btn-success centered" id="btnGuardar">Guardar</button>
+        <div class="col-md-12">
+          <button class="btn btn-lg btn-success" id="btnGuardar">Guardar</button>
         </div>
       </div>  
     </div>

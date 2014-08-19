@@ -18,6 +18,7 @@
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="RegistroProfesor.php">Registrar</a></li>
 						<li><a href="ConsultarProfesor.php">Consultar</a></li>
+						<li><a href="CambioContrasena.php">Cambiar Contraseña</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">

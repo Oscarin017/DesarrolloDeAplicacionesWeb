@@ -12,7 +12,14 @@
         $("#btnRegistrar").click(function(event)
         {
           event.preventDefault();
-          insertarAlumno();
+          if($("#Nombre").val()=="" || $("#Ape_Pat").val()=="" || $("#Ape_Mat").val()=="" || $("#Email").val()=="" || $("#EmailT").val()=="")
+          {
+            alert("Ingresa los campos faltantes.")
+          }
+          else
+          {
+            insertarAlumno();
+          }
         });
 
       });
@@ -59,11 +66,11 @@
               </div>
               <div class="form-group">
                 <label for="Ap_Pat">Apellido Paterno</label>
-                <input type="text" name="Ape_Pat" class="form-control" id="Ap_Pat" placeholder="Apellido Paterno">
+                <input type="text" name="Ape_Pat" class="form-control" id="Ape_Pat" placeholder="Apellido Paterno">
               </div>
               <div class="form-group">
                 <label for="Ap_Mat">Apellido Materno</label>
-                <input type="text" name="Ape_Mat" class="form-control" id="Ap_Mat" placeholder="Apellido Materno">
+                <input type="text" name="Ape_Mat" class="form-control" id="Apw_Mat" placeholder="Apellido Materno">
               </div>
             </div>
             <div class="col-md-4">

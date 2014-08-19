@@ -1,14 +1,25 @@
-.glyphicon{
+.glyphicon
+{
 	color:steelblue;
 }
 #usarPrincipal
 {
 	font-size:14em;
 }
-#IconoPrincipal{
+#IconoPrincipal
+{
 	text-align: center;
 	margin:30px auto;
 }
-.form-group{
+.form-group
+{
 	padding:10px;
+}
+.btnasis
+{
+	width:8em;
+}
+.centered{
+	width:200px;
+	font-weight: bold;
 }
